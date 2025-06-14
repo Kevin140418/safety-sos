@@ -1,0 +1,18 @@
+.pagination-item.active,
+.pagination-item:hover {
+    background-color: #007bff;
+    /* Change to your desired color */
+    border-color: #007bff;
+    /* Change to your desired color */
+    color: #fff;
+    /* Change to your desired color */
+}
+.paginationColor {
+    color: #007bff;
+    /* Change to your desired color */
+}
+
+.paginate_button {
+    background-color: orange;
+    color: white;
+}

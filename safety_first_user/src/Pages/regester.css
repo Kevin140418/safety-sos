@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background image applied when 'image-background' class is added to the body */
+body.image-background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/public/img/bg.jpg"); /* Ensure the path is correct */
+  background-size: cover;
+  background-position: center;
+}
+
+.register-form {
+  background: rgba(64, 64, 64, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  padding: 40px;
+  border-radius: 16px;
+  backdrop-filter: blur(25px);
+  text-align: left;
+  color: white;
+  width: 660px;
+  box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Title of the form */
+.register-title {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Input fields container */
+.input-box {
+  margin: 20px 0; /* Adjusted to reduce space between fields */
+  position: relative;
+}
+
+/* Label styling */
+.input-box label {
+  display: block;
+  margin-bottom: 10px; /* Added space between label and input */
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+}
+
+/* Input field styling */
+.input-box input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+  border: none;
+  padding: 12px 12px 12px 45px;
+  border-radius: 99px;
+  outline: 3px solid transparent;
+  transition: 0.3s;
+  font-size: 17px;
+  color: white;
+  font-weight: 600;
+  position: relative;
+  z-index: 1; /* Make sure the text appears above the blur */
+}
+
+/* Apply background image and blur effect */
+.input-box input::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("/public/img/bg.jpg"); /* Background image */
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px); /* Apply blur effect */
+  z-index: -1; /* Place it behind the input text */
+}
+
+/* Placeholder text styling */
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Focused input field styling */
+.input-box input:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Icon positioning inside input field */
+.input-box i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Register button styling */
+.register-btn {
+  width: 100%;
+  padding: 8px;
+  background: #2f9cf4;
+  border: none;
+  border-radius: 99px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.register-btn:focus {
+  outline: none;
+}
+
+.register-btn:active {
+  transform: translateY(2px);
+}
+
+.register-btn:disabled {
+  background: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}
+
+.register-btn:hover {
+  background: #0b87ec;
+}
+
+/* Register section link styling */
+.register {
+  margin-top: 20px; /* Adds space between the form and the register link */
+  font-size: 16px;
+  text-align: center; /* Center the link */
+}
+
+/* Register link hover effect */
+.register a {
+  color: white !important;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register a:hover {
+  text-decoration: underline;
+  color: white !important;
+}
+
+.link a {
+  color: rgb(227, 180, 217) !important;
+  text-decoration: underline double;
+}
+
+.link a:hover {
+  color: rgb(0, 255, 221) !important;
+  text-decoration: underline double;
+}
+
+.button1 {
+  margin-top: 3%;
+  width: 100%;
+  padding: 8px;
+  background: #2f9cf4;
+  border: none;
+  border-radius: 99px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Error and success messages below input fields */
+.input-box.error,
+.input-box.success {
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+}
+
+.input-box.error {
+  color: red;
+}
+
+.input-box.success {
+  color: green;
+}
+
+/* General message for the form */
+.register-form.error,
+.register-form.success {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: white;
+  font-weight: 600;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .register-form {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .register-title {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+
+  .input-box input {
+    font-size: 16px;
+  }
+
+  .register-btn {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  .register-btn{
+    width: 100%;
+    margin-top: 20px;
+  }
+}
