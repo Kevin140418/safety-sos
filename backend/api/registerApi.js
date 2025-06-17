@@ -1,14 +1,14 @@
 const connectDB = require("../db/dbConnect");
 
-
 async function SignUpApi(req, res) {
   try {
     const db = await connectDB();
     const collection = db.collection("users");
 
-    const { username, email, role, phoneNo, password } = req.body;
+    // Match frontend fields
+    const { name, email, phone, password, address } = req.body;
 
-    if (!username || !email || !role || !phoneNo || !password) {
+    if (!name || !email || !phone || !password || !address) {
       return res
         .status(400)
         .json({ success: false, message: "Missing required fields!" });
@@ -23,17 +23,15 @@ async function SignUpApi(req, res) {
     }
 
     // Create a unique index on the email field if it doesn't already exist
-    await collection.createIndex(
-      { email: 1 },
-      { unique: true, required: true }
-    );
+    await collection.createIndex({ email: 1 }, { unique: true });
 
     await collection.insertOne({
-      username,
+      name,
       email,
-      role : "0",
-      phoneNo,
+      phone,
       password,
+      address,
+      role: "0", // add default role if needed
     });
 
     return res
