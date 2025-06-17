@@ -26,7 +26,7 @@ function Feedback() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:8000/addFeedback", data);
+            const response = await axios.post("https://safety-sos-1.onrender.com/addFeedback", data);
             if (response.data.success) {
                 alert(response.data.message);
                 navigate("/");

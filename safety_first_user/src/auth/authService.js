@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 const checkSession = async () => {
     try {
         // console.log('Logging');
-        const response = await axios.post('http://localhost:8000/session');
+        const response = await axios.post('https://safety-sos-1.onrender.com/session');
         // console.log(response.data.isCardAssigned);
         return ({ isAuth: true, isCard: response.data.isCardAssigned }); // Session is valid
     } catch (error) {

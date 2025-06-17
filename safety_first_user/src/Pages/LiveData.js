@@ -12,7 +12,7 @@ function LiveData() {
   // Fetch device data from the API on component mount
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getLiveData")
+      .get("https://safety-sos-1.onrender.com/getLiveData")
       .then((response) => {
         setDevices(response.data.liveData);
         if (response.data.liveData.length > 0) {

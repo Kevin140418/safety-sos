@@ -12,7 +12,7 @@ function Alerts() {
   // Fetch device data from the API on component mount
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getAlertsUser")
+      .get("https://safety-sos-1.onrender.com/getAlertsUser")
       .then((response) => {
         setDevices(response.data.liveData);
         if (response.data.liveData.length > 0) {

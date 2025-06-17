@@ -26,7 +26,7 @@ export default function Login() {
     e.preventDefault();
     try {
       // Send login request to the server
-      const response = await axios.post("http://localhost:8000/login", data);
+      const response = await axios.post("https://safety-sos-1.onrender.com/login", data);
       if (response.status === 200) {
         toast.success("Login successful", {
           autoClose: 1000,

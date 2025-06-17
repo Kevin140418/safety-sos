@@ -27,7 +27,7 @@ function Complaint() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/addComplaints",
+        "https://safety-sos-1.onrender.com/addComplaints",
         data
       );
       if (response.data.success) {

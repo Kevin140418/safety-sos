@@ -14,7 +14,7 @@ function GetHistoryData() {
   // Fetch device data from the API on component mount
   useEffect(() => {
     axios
-      .post("http://localhost:8000/getHistoryData")
+      .post("https://safety-sos-1.onrender.com/getHistoryData")
       .then((response) => {
         setHistoryData(response.data.historyData);
         if (response.data.historyData.length > 0) {
