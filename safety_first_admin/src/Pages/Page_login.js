@@ -1,46 +1,43 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // ✅ Import navigate
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../Pages/admin_login.css";
 
 function Page_login() {
-  const navigate = useNavigate(); // ✅ Hook for redirection
+  const [loginData, setLoginData] = useState({ email_id: "", password: "" });
+  const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
 
-  const [loginData, setLoginData] = useState({
-    email_id: "",
-    password: "",
-  });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLoginData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://safety-sos-1.onrender.com/admin/login", loginData);
-
-      if (res.status === 200) {
-        // ✅ Redirect to admin dashboard or any other route
-        navigate("/dashboard"); // 🔁 Change this to your correct route
+      const res = await axios.post(
+        "https://safety-sos-1.onrender.com/admin/login",
+        loginData
+      );
+      if (res.data.success) {
+        toast.success("Login successful", {
+          autoClose: 1500,
+          onClose: () => navigate("/"),
+        });
+      } else {
+        toast.error(res.data.message || "Login failed");
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
-      console.error(error);
+      toast.error(error.response?.data?.message || "Login failed");
     }
   };
 
   useEffect(() => {
     document.body.classList.add("image-background");
-    return () => {
-      document.body.classList.remove("image-background");
-    };
+    return () => document.body.classList.remove("image-background");
   }, []);
 
   return (
@@ -49,11 +46,10 @@ function Page_login() {
         <h1 className="login-title">Welcome Back,</h1>
         <form onSubmit={handleLoginSubmit}>
           <div className="input-box">
-            <i className="fa-solid fa-user" style={{ color: "#000000" }} />
+            <i className="fa-solid fa-user" />
             <input
               type="email"
               name="email_id"
-              className="form-control"
               placeholder="Enter your email"
               onChange={handleChange}
               value={loginData.email_id}
@@ -61,11 +57,10 @@ function Page_login() {
             />
           </div>
           <div className="input-box">
-            <i className="fa-solid fa-lock" style={{ color: "#000000" }} />
+            <i className="fa-solid fa-lock" />
             <input
               type="password"
               name="password"
-              className="form-control"
               placeholder="Enter your password"
               onChange={handleChange}
               value={loginData.password}
