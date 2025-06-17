@@ -1,12 +1,15 @@
-const { LoginApi } = require("./api/loginApi");
-const { SignUpApi } = require("./api/registerApi");
-const connectDB = require("./db/dbConnect");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+
+const connectDB = require("./db/dbConnect");
+
+const { LoginApi } = require("./api/loginApi");
+const { SignUpApi } = require("./api/registerApi");
 const Session = require("./api/session");
 const Logout = require("./api/logout");
-const { TempratureSensorApi } = require("./api/user/tempratureData");
+
+// Admin APIs
 const { ViewTempratureData } = require("./api/admin/viewTempratureData");
 const { ViewSmokeData } = require("./api/admin/viewSmokeData");
 const { ViewMQ135Data } = require("./api/admin/viewMQ135Data");
@@ -15,21 +18,25 @@ const { ViewFireData } = require("./api/admin/viewFireData");
 const { ViewusersData } = require("./api/admin/viewUsers");
 const { AddDevice } = require("./api/admin/addDevice");
 const { ViewDeviceLocation } = require("./api/admin/viewDeviceLocation");
-const { AddComplaints } = require("./api/user/addComplaints");
 const { ViewInquiry } = require("./api/admin/viewInquiry");
-const { AddFeedback } = require("./api/user/addFeedback");
 const { ViewAlerts } = require("./api/admin/viewAlerts");
 const { ViewFeedback } = require("./api/admin/viewFeedback");
 const { GetCounts } = require("./api/admin/getCounts");
+const { AdminLoginApi } = require("./api/admin/adminLogin");
+
+// User APIs
+const { TempratureSensorApi } = require("./api/user/tempratureData");
+const { AddComplaints } = require("./api/user/addComplaints");
+const { AddFeedback } = require("./api/user/addFeedback");
 const { GetLiveData } = require("./api/user/getLiveData");
 const { ViewAlertsUser } = require("./api/user/getAlerts");
 const { GetHistoryData } = require("./api/user/getHistoryData");
-const { AdminLoginApi } = require("./api/admin/adminLogin");
 const { Register } = require("./api/user/Regester");
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -49,13 +56,18 @@ app.use(
   })
 );
 
-//! common
+// ✅ Root route for deployment test
+app.get("/", (req, res) => {
+  res.send("🚀 Backend is live and connected to MongoDB");
+});
+
+//! Common Routes
 app.post("/register", Register);
 app.post("/login", LoginApi);
 app.post("/session", Session);
 app.get("/logout", Logout);
 
-//! admin
+//! Admin Routes
 app.post("/admin/login", AdminLoginApi);
 app.get("/getTemprature", ViewTempratureData);
 app.get("/getSmoke", ViewSmokeData);
@@ -70,7 +82,7 @@ app.get("/getFeedback", ViewFeedback);
 app.post("/addDevice", AddDevice);
 app.get("/getCounts", GetCounts);
 
-//! user
+//! User Routes
 app.post("/temprature", TempratureSensorApi);
 app.post("/addComplaints", AddComplaints);
 app.post("/addFeedback", AddFeedback);
@@ -78,13 +90,9 @@ app.get("/getLiveData", GetLiveData);
 app.get("/getAlertsUser", ViewAlertsUser);
 app.post("/getHistoryData", GetHistoryData);
 
-// ✅ Root route for browser check
-app.get("/", (req, res) => {
-  res.send("🚀 Backend is live and connected to MongoDB");
-});
-
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`✅ Server is running on port ${PORT}`);
 });
 
 connectDB();
