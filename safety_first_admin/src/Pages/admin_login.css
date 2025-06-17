@@ -3,7 +3,6 @@
 
 /* Global Reset */
 * {
-  margin-top: 100px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -16,7 +15,7 @@ body.image-background {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/public/assets/images/bg.jpg'); /* Ensure the path is correct */
+  background-image: url('/assets/images/bg.jpg'); /* Corrected path */
   background-size: cover;
   background-position: center;
   margin: 0;
@@ -24,7 +23,6 @@ body.image-background {
 
 /* Main login form container */
 .login-form {
-
   margin-top: 110px;
   background: rgba(64, 64, 64, 0.25);
   border: 3px solid rgba(255, 255, 255, 0.3);
@@ -53,52 +51,51 @@ body.image-background {
 /* Input fields styling */
 .input-box input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.1); /* Transparent background */
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   padding: 12px 12px 12px 45px;
   border-radius: 99px;
-  outline: none; /* Remove default outline */
+  outline: none;
   transition: 0.3s;
-  font-size: 17px;  /* Match font size */
-  font-weight: 600; /* Match font weight */
-  color: #ffffff;  /* Input text color */
+  font-size: 17px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 /* Placeholder color for input fields */
 .login-form .input-box input::placeholder {
-  color: rgba(255, 255, 255, 0.8); /* Match placeholder color */
+  color: rgba(255, 255, 255, 0.8);
   font-size: 17px;
   font-weight: 500;
-  opacity: 1; /* Ensure placeholder is fully visible */
-}
-
-/* Input focus effect - only on input field border */
-.input-box input:focus {
-  border: 2px solid rgba(255, 255, 255, 0.3); /* Subtle white border on focus */
-  background: rgba(255, 255, 255, 0.2); /* Slightly brighter background on focus */
-}
-
-/* Keep placeholder color the same when input is focused */
-.input-box input:focus::placeholder {
-  color: rgba(255, 255, 255, 0.8); /* Ensure placeholder remains visible and same color */
   opacity: 1;
 }
 
-/* Input icons inside input boxes */
+/* Input focus effect */
+.input-box input:focus {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.input-box input:focus::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+}
+
+/* Input icons */
 .input-box i {
   position: absolute;
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.8); /* Icon color */
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Submit button styling */
+/* Submit button */
 .login-btn {
   width: 100%;
   padding: 10px 0;
-  background: #2f9cf4;  /* Blue background */
+  background: #2f9cf4;
   border: none;
   border-radius: 99px;
   font-size: 16px;
@@ -108,10 +105,10 @@ body.image-background {
 }
 
 .login-btn:hover {
-  background: #0b87ec;  /* Darker blue on hover */
+  background: #0b87ec;
 }
 
-/* Register section (optional for the admin form) */
+/* Optional register link */
 .register {
   margin-top: 15px;
   font-size: 15px;
