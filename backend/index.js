@@ -1,14 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+
 const connectDB = require("./db/dbConnect");
 
-// Import all APIs
+// Auth APIs
 const { LoginApi } = require("./api/loginApi");
-const { Register } = require("./api/user/Regester");
+const { SignUpApi } = require("./api/registerApi"); // Optional, you seem to use Register instead
 const Session = require("./api/session");
 const Logout = require("./api/logout");
-const { AdminLoginApi } = require("./api/admin/adminLogin");
 
 // Admin APIs
 const { ViewTempratureData } = require("./api/admin/viewTempratureData");
@@ -23,6 +23,7 @@ const { ViewInquiry } = require("./api/admin/viewInquiry");
 const { ViewAlerts } = require("./api/admin/viewAlerts");
 const { ViewFeedback } = require("./api/admin/viewFeedback");
 const { GetCounts } = require("./api/admin/getCounts");
+const { AdminLoginApi } = require("./api/admin/adminLogin");
 
 // User APIs
 const { TempratureSensorApi } = require("./api/user/tempratureData");
@@ -31,10 +32,12 @@ const { AddFeedback } = require("./api/user/addFeedback");
 const { GetLiveData } = require("./api/user/getLiveData");
 const { ViewAlertsUser } = require("./api/user/getAlerts");
 const { GetHistoryData } = require("./api/user/getHistoryData");
+const { Register } = require("./api/user/Regester"); // <-- Your working register
 
 const app = express();
 const PORT = 8000;
 
+// ✅ Connect to MongoDB before starting server
 connectDB().then(() => {
   console.log("✅ MongoDB Connected");
 
@@ -42,44 +45,41 @@ connectDB().then(() => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // CORS setup
   app.use(
     cors({
       origin: [
-        "https://safety-sos.vercel.app",
-        "https://safety-sos-tf9n.vercel.app",
-        "http://localhost:3000",
-        "http://localhost:3001",
+        "https://safety-sos.vercel.app",       // Admin panel
+        "https://safety-sos-tf9n.vercel.app",  // User panel
+        "http://localhost:3000",               // Local (user)
+        "http://localhost:3001",               // Local (admin)
       ],
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE"],
     })
   );
 
+  // Session setup
   app.use(
     session({
       secret: "secret",
       resave: false,
-      saveUninitialized: false,
-      cookie: {
-        httpOnly: true,
-        secure: true, // required for HTTPS on Render
-        sameSite: "none", // required for cross-origin
-      },
+      saveUninitialized: true,
     })
   );
 
-  // Health Check
+  // Health check
   app.get("/", (req, res) => {
     res.send("🚀 Backend is live and connected to MongoDB");
   });
 
-  // Routes
-  app.post("/register", Register);
+  //! Common Routes
+  app.post("/register", Register); // <--- Used by frontend
   app.post("/login", LoginApi);
   app.post("/session", Session);
   app.get("/logout", Logout);
 
-  // Admin Routes
+  //! Admin Routes
   app.post("/admin/login", AdminLoginApi);
   app.get("/getTemprature", ViewTempratureData);
   app.get("/getSmoke", ViewSmokeData);
@@ -94,7 +94,7 @@ connectDB().then(() => {
   app.post("/addDevice", AddDevice);
   app.get("/getCounts", GetCounts);
 
-  // User Routes
+  //! User Routes
   app.post("/temprature", TempratureSensorApi);
   app.post("/addComplaints", AddComplaints);
   app.post("/addFeedback", AddFeedback);
@@ -102,7 +102,10 @@ connectDB().then(() => {
   app.get("/getAlertsUser", ViewAlertsUser);
   app.post("/getHistoryData", GetHistoryData);
 
+  // ✅ Start server
   app.listen(PORT, () => {
     console.log(`✅ Server is running on http://localhost:${PORT}`);
   });
+}).catch((err) => {
+  console.error("❌ Failed to connect to MongoDB:", err);
 });
