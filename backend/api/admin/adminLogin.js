@@ -14,12 +14,12 @@ async function AdminLoginApi(req, res) {
         .json({ success: false, message: "Invalid username or password" });
     }
 
-    //session creation
+    // Set session
     req.session.user = { session: user, isAuth: true };
-    const userDatas = req.session.user;
+    console.log("✅ Session Created:", req.session);
 
     res.status(200).json({
-      userData: userDatas,
+      userData: req.session.user,
       success: true,
       message: "Login Successful",
     });

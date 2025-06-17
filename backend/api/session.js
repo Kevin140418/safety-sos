@@ -1,17 +1,21 @@
 async function Session(req, res) {
-    try {
-        const userDatas = req.session.user;
+  try {
+    console.log("🔍 Session Check:", req.session);
 
-        //console.log(userDatas.username);
-        if (!userDatas) {
-            return res.status(401).json({ message: "No sesssion created!" });
-        } else {
-            res.status(200)
-                .json({ sessionData: userDatas, success: true, message: "got Successful" });
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+    const userDatas = req.session.user;
+
+    if (!userDatas) {
+      return res.status(401).json({ message: "No session created!" });
     }
+
+    res.status(200).json({
+      sessionData: userDatas,
+      success: true,
+      message: "Session Valid",
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
-module.exports = Session
+module.exports = Session;
