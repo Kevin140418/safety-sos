@@ -6,7 +6,7 @@ async function LoginApi(req, res) {
     const db = await connectDB();
     const collection = db.collection("users");
 
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     
     const user = await collection.findOne({ email });
     if (!user) {
