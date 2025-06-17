@@ -15,7 +15,7 @@ body.image-background {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/assets/images/bg.jpg'); /* Corrected path */
+  background-image: url('../img/bg.jpg'); /* Corrected path */
   background-size: cover;
   background-position: center;
   margin: 0;
