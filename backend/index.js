@@ -28,7 +28,6 @@ const { AdminLoginApi } = require("./api/admin/adminLogin");
 const { Register } = require("./api/user/Regester");
 
 const app = express();
-
 const PORT = 8000;
 
 app.use(express.json());
@@ -50,13 +49,13 @@ app.use(
   })
 );
 
-//!common
+//! common
 app.post("/register", Register);
 app.post("/login", LoginApi);
 app.post("/session", Session);
 app.get("/logout", Logout);
 
-//!admin
+//! admin
 app.post("/admin/login", AdminLoginApi);
 app.get("/getTemprature", ViewTempratureData);
 app.get("/getSmoke", ViewSmokeData);
@@ -71,13 +70,18 @@ app.get("/getFeedback", ViewFeedback);
 app.post("/addDevice", AddDevice);
 app.get("/getCounts", GetCounts);
 
-//!user
+//! user
 app.post("/temprature", TempratureSensorApi);
 app.post("/addComplaints", AddComplaints);
 app.post("/addFeedback", AddFeedback);
 app.get("/getLiveData", GetLiveData);
 app.get("/getAlertsUser", ViewAlertsUser);
 app.post("/getHistoryData", GetHistoryData);
+
+// ✅ Root route for browser check
+app.get("/", (req, res) => {
+  res.send("🚀 Backend is live and connected to MongoDB");
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
