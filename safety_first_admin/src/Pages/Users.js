@@ -8,7 +8,7 @@ function Users() {
   const [datas, setDatas] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:8000/getUsers")
+    fetch("https://safety-sos-1.onrender.com/getUsers")
       .then((response) => response.json())
       .then((data) => setDatas(data))
       .then(() => setIsLoaded(true));

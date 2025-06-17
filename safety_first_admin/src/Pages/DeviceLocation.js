@@ -9,7 +9,7 @@ function DeviceLocation() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0, { behavior: "smooth" });
-    fetch("http://localhost:8000/getDeviceLocation")
+    fetch("https://safety-sos-1.onrender.com/getDeviceLocation")
       .then((response) => response.json())
       .then((data) => setDatas(data))
       .then(() => setIsLoaded(true));

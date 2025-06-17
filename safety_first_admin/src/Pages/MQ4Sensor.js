@@ -10,7 +10,7 @@ function MQ4Sensor() {
   useEffect(() => {
 
     window.scrollTo(0, 0, { behavior: 'smooth' });
-    fetch("http://localhost:8000/getMQ4")
+    fetch("https://safety-sos-1.onrender.com/getMQ4")
       .then((response) => response.json())
       .then((data) => setDatas(data))
       .then(() => setIsLoaded(true));

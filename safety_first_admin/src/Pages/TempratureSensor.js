@@ -10,7 +10,7 @@ function TempratureSensor() {
   useEffect(() => {
 
     window.scrollTo(0, 0, { behavior: 'smooth' });
-    fetch("http://localhost:8000/getTemprature")
+    fetch("https://safety-sos-1.onrender.com/getTemprature")
       .then((response) => response.json())
       .then((data) => setDatas(data))
       .then(() => setIsLoaded(true));

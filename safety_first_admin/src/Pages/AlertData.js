@@ -9,7 +9,7 @@ function AlertData() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getAlertsUser")
+      .get("https://safety-sos-1.onrender.com/getAlertsUser")
       .then((response) => {
         setLiveData(response.data.liveData);
         setSelectedDevice(response.data.liveData[0]); // Select the first device by default

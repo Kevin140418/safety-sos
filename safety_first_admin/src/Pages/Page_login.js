@@ -21,7 +21,7 @@ function Page_login() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/admin/login", loginData);
+      await axios.post("https://safety-sos-1.onrender.com/admin/login", loginData);
       window.location.reload(false);
     } catch (error) {
       alert(error.response.data.message);

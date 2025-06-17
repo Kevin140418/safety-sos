@@ -12,7 +12,7 @@ function Header() {
 
   const logout = async () => {
     try {
-      await axios.get("http://localhost:8000/logout");
+      await axios.get("https://safety-sos-1.onrender.com/logout");
       window.location.reload(false);
     } catch (error) {
       console.log("Error:", error);

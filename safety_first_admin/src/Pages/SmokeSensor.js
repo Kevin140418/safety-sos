@@ -10,7 +10,7 @@ function SmokeSensor() {
   useEffect(() => {
 
     window.scrollTo(0, 0, { behavior: 'smooth' });
-    fetch("http://localhost:8000/getSmoke")
+    fetch("https://safety-sos-1.onrender.com/getSmoke")
       .then((response) => response.json())
       .then((data) => setDatas(data))
       .then(() => setIsLoaded(true));

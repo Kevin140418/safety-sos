@@ -10,7 +10,7 @@ function FireSensor() {
   useEffect(() => {
 
     window.scrollTo(0, 0, { behavior: 'smooth' });
-    fetch("http://localhost:8000/getFire")
+    fetch("https://safety-sos-1.onrender.com/getFire")
       .then((response) => response.json())
       .then((data) => setDatas(data))
       .then(() => setIsLoaded(true));
