@@ -50,7 +50,7 @@ connectDB().then(() => {
     cors({
       origin: [
         "https://safety-sos.vercel.app",       // Admin panel
-        "https://safetyfirstsossystem.dedyn.io/",  // User panel
+        "https://safetyfirstsossystem.dedyn.io",  // User panel
         "http://localhost:3000",               // Local (user)
         "http://localhost:3001",               // Local (admin)
       ],
